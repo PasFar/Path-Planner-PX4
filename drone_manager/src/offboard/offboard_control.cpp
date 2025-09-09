@@ -510,10 +510,10 @@ void OffboardControl::move_cmd(){
 				start_traj(sp, yaw_d, duration);
 			}
 			else if(cmd =="nav"){			
-				RCLCPP_WARN(this->get_logger(), "enter while nav");
+				// RCLCPP_WARN(this->get_logger(), "enter while nav");
 
 				do{	
-					RCLCPP_INFO(this->get_logger(), "In cnd nav");
+					// RCLCPP_INFO(this->get_logger(), "In cnd nav");
 					_replan = true;
 					_wp_traj_completed = false;
 			
@@ -539,10 +539,10 @@ void OffboardControl::move_cmd(){
 						boost::thread check_path_t( &OffboardControl::check_path, this, poses_to_check, id_wp_ptr); 
 
 						while(_wp_traj_completed == false && !_stop_trajectory ) {	
-							RCLCPP_INFO(this->get_logger(), "in while, _wp_traj_completed=%d",_wp_traj_completed); //CI VA
+							// RCLCPP_INFO(this->get_logger(), "in while, _wp_traj_completed=%d",_wp_traj_completed); //CI VA
 							
 							if(!_replan && wp_index<int(opt_poses->size())){
-							    RCLCPP_INFO(this->get_logger(), "after if"); // VI VA
+							    // RCLCPP_INFO(this->get_logger(), "after if"); // VI VA
 								sp(0) = (*opt_poses)[wp_index].position.x;
 								sp(1) = (*opt_poses)[wp_index].position.y;
 								sp(2) = (*opt_poses)[wp_index].position.z;    
@@ -585,7 +585,7 @@ void OffboardControl::move_cmd(){
 								break;
 							}
 						}
-						RCLCPP_WARN(this->get_logger(), "fuori while nav (traj pub)");
+						// RCLCPP_WARN(this->get_logger(), "fuori while nav (traj pub)");
 					}else{
 						RCLCPP_WARN(this->get_logger(), "No valid path found for navigation command");
 					}
@@ -1335,10 +1335,10 @@ void OffboardControl::check_path(const std::vector<POSE> & poses, const std::sha
 
 
 	while( valid_path && !_stop_trajectory && static_cast<size_t>(*wp) < poses.size() && !_wp_traj_completed && !_replan){	 // continue checking while executing
-		RCLCPP_INFO(get_logger(), "nel while grosso");
+		//RCLCPP_INFO(get_logger(), "nel while grosso");
 
 		if(*wp != 0){
-			RCLCPP_INFO(get_logger(), "nell'if *wp!=0");
+			//RCLCPP_INFO(get_logger(), "nell'if *wp!=0");
 
 			if(_do_transform){
 				matrix::Vector3f position;
@@ -1369,7 +1369,7 @@ void OffboardControl::check_path(const std::vector<POSE> & poses, const std::sha
 			RCLCPP_INFO(get_logger(), "START COLL CECK pose size= %zu, wp= %d", poses.size(), *wp);
 
 			for(int i=*wp ; i<static_cast<int>(poses.size()); i++ ) { // dovrebbe essere <= perchè se rrt trova un solo punto non fa coll check. con 2 segmenti lo ha fatto.(goal molto vicino)
-				RCLCPP_INFO(get_logger(), "nel for wp"); // NON CI VA
+				// RCLCPP_INFO(get_logger(), "nel for wp"); // NON CI VA
 				pt_f << poses[i].position.x, poses[i].position.y, poses[i].position.z;
 				
 				dir = (pt_f - pt_i);
@@ -1597,4 +1597,5 @@ int main(int argc, char* argv[]) {
 	rclcpp::shutdown();
 	return 0;
 }
+
 
