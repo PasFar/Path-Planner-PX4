@@ -34,6 +34,7 @@
 
    cp /PATH/TO/sitl_utils/ros2_ws-src/pkg/Drone-Manager/models/model.sdf /PATH/TO/sitl_utils/PX4-Autopilot/Tools/simulation/gz/models/x500_depth/ 
    
+   cp /PATH/TO/sitl_utils/ros2_ws-src/pkg/Drone-Manager/models/px4_humble_dockerfile.txt /PATH/TO/sitl_utils/docker/
    ```
 
 5. **Build the Docker image:**
@@ -69,7 +70,7 @@ source install/setup.bash
 ```
 Then launch the whole simulation with:
 ```bash
-cd src/pkg/drone_manager
+cd src/pkg/Drone-Manager/drone_manager
 tmuxp load simulation.yml
 ```
 
