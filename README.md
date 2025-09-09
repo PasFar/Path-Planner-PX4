@@ -21,7 +21,7 @@
    cd ..
    mkdir -p ros2_ws-src/pkg
    cd ros2_ws-src/pkg
-   git clone 
+   git clone https://github.com/PasFar/Drone-Manager.git
    ```
 
 4. **Set up custom simulation assets and configuration:**
