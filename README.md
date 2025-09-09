@@ -13,11 +13,15 @@
    ```bash
    cd sitl_utils
    git clone https://github.com/PX4/PX4-Autopilot.git --recursive
+   cd PX4-Autopilot
+   git checkout release/1.14 -f
+   git submodule update
    ```
 
-3. **Clone the custom Drone Manager package and the custom ArUco package:**
+3. **Clone the custom Drone Manager package:**
 
    ```bash
+   cd ..
    mkdir -p ros2_ws-src/pkg
    cd ros2_ws-src/pkg
    git clone https://github.com/PasFar/Drone-Manager.git
@@ -70,12 +74,16 @@ cd ros2_ws
 colcon build
 source install/setup.bash
 ```
-Then launch the whole simulation with:
+Then be sure to have installed the map:
 ```bash
 cd src/pkg/Drone-Manager/drone_manager
+git lfs install
+git lfs pull
+```
+And, in the end, launch the simulation with:
+```bash
 tmuxp load simulation.yml
 ```
-
 
 Terminals opened by `tmuxp load simulation.yml`
 ---------------------------------------------------------
