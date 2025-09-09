@@ -18,12 +18,12 @@ Purpose and responsibilities
 Main components
 ---------------
 Nodes
-- `offboard_control` — Core controller that executes trajectories, interfaces with PX4 messages, and contains trajectory and planner wiring. It composes the `Trajectory` class, spline planner modules and planner interfaces to convert high-level goals into timed trajectories and vehicle commands.
+- `offboard_control` — Core controller that executes trajectories, interfaces with PX4 messages, and contains trajectory and planner wiring. 
 - `move_manager_node` — Higher-level movement manager that accepts motion requests (via the package's custom `MoveCmd.msg`) and orchestrates planning, acceptance checks and safe handover to the `offboard_control` node.
-- `fsm_node` — Finite-state machine that manages flight modes and behaviour sequencing (for example: idle, takeoff, mission, return, land). It centralizes mode transitions and safety checks.
+- `fsm_node` — Finite-state machine that manages flight modes and behaviour sequencing. It centralizes mode transitions and safety checks.
 - `battery_node` — Monitors battery state and publishes alerts or status messages that other components can use to trigger safe behaviours.
 - `teleop_node` — Teleoperation interface for manual control; it transforms operator inputs into `MoveCmd` or direct control messages for the offboard controller.
-- `px4_tf_pub` — Publishes transforms between the PX4 vehicle frames and the ROS TF tree so other nodes can consume pose and transform data consistently.
+- `px4_tf_pub` — Publishes transforms between the PX4 vehicle frames and the ROS TF tree so other nodes can access to pose and transform data consistently.
 
 
 
@@ -45,7 +45,7 @@ State behaviours
 - Coverage:
 	- Iterates through waypoints, issuing `flyto(<waypoint>)` commands and waiting for arrival checks before advancing.
 	- When all waypoints are visited, commands a return to the charging station and marks coverage complete prior to landing.
-	- If `battery_low` is received, the FSM records the last visited waypoint, switches `waypoint_idx_` to a hardcoded landing waypoint (index 4 — `goal5`), sends a fly-to there and transitions to `Land` when arrived.
+	- If `battery_low` is received, the FSM records the last visited waypoint, switches `waypoint_idx_` to the landing waypoint (index 4 — `goal5`), sends a fly-to there and transitions to `Land` when arrived.
 - Land:
 	- Sends `land` and, if battery was low, waits until the odometry z indicates a landed condition (z < 0.02).
 	- On landing it publishes `charged_` to `/battery`, clears `battery_low_`, and either resumes the mission (by restoring the last visited waypoint and switching to `Takeoff`) or transitions to `Completed` if mission/coverage were finished.

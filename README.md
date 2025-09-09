@@ -73,27 +73,27 @@ Then launch the whole simulation with:
 cd src/pkg/drone_manager
 tmuxp load simulation.yml
 ```
-This will open the following terminals
 
-Terminals opened by `tmuxp load simulation.yml` and purpose
+
+Terminals opened by `tmuxp load simulation.yml`
 ---------------------------------------------------------
-The `simulation.yml` session defines two named tmux windows (`px4` and `rtabmap`) each split into multiple panes. Below is a concise mapping of each pane and why it is opened.
+The `simulation.yml` session defines two named tmux windows (`px4` and `rtabmap`) each split into multiple panes. 
 
 Window: `px4`
 - Pane 1: `cd ~/PX4-Autopilot` + `make px4_sitl gz_x500_depth`
-   - Starts (or rebuilds and starts) the PX4 SITL binary using the `gz_x500_depth` Gazebo world. This runs the autopilot simulation instance the rest of the stack connects to.
+   - Starts the PX4 SITL binary using the `gz_x500_depth` Gazebo world. This runs the autopilot simulation instance the rest of the stack connects to. In particular, the x500 drone is spawned within the Leonardo Race Field.
 - Pane 2: `MicroXRCEAgent udp4 -p 8888`
-   - Runs the Micro XRCE Agent which provides a communication bridge (typically between PX4 and external middleware or micro-ROS devices) over UDP.
+   - Runs the Micro XRCE Agent which provides a communication bridge.
 - Pane 3: `ros2 run ros_gz_bridge parameter_bridge ...`
-   - Launches the `ros_gz_bridge` parameter bridge to forward selected Gazebo topics (camera, depth, odometry, /clock) into ROS 2 topics so ROS nodes can consume simulated sensors and simulation time.
+   - Launches the `ros_gz_bridge` parameter bridge to forward selected Gazebo topics (camera, depth, odometry, /clock) into ROS 2 topics so ROS nodes can have access to simulated sensors and simulation time.
 - Pane 4: `ros2 launch drone_manager rtabmap_sim.launch.py`
-   - Starts the RTAB-Map-related launch which may provide mapping/localization utilities used in the simulation.
+   - Starts the RTAB-Map-related launch which provides localization utilities used in the simulation by loading the static map of the environment.
 - Pane 5: `ros2 run joy joy_node --ros-args -r use_sim_time:=true`
-   - Runs a joystick input node (used for teleoperation). In simulation this can be left active to accept human inputs or mapped test inputs.
+   - Runs a joystick input node (used for teleoperation).
 - Pane 6: `LD_PRELOAD=/usr/lib/x86_64-linux-gnu/liboctomap.so ros2 run rviz2 rviz2 -d .../rviz/leo.rviz`
-   - Opens RViz configured with the provided `leo.rviz` file for live visualization of the robot, point clouds, maps and trajectories. `LD_PRELOAD` ensures RViz can load octomap plugins if needed.
+   - Opens RViz configured with the provided `leo.rviz` file for live visualization of the drone, point, maps and trajectories.
 - Pane 7: `ros2 launch drone_manager tf_static_sim.launch.py use_sim_time:=true`
-   - Publishes static transforms and TF configuration required for simulation frames (helps keep the TF tree consistent for planners and visualizers).
+   - Publishes static transforms and TF configuration required for the coverage task.
 
 Window: `rtabmap`
 - Pane 1: `ros2 run drone_manager offboard_control --ros-args --params-file .../sim_params.yaml`
@@ -109,11 +109,7 @@ Window: `rtabmap`
 - Pane 6: `ros2 run drone_manager fsm_node`
    - Starts the finite-state machine node which manages flight modes and high-level behaviour sequencing.
 - Pane 7: `ros2 launch aruco_ros multi.launch.py marker_ids:=201,1,2 marker_sizes:=0.5,0.5,0.5`
-   - Starts ArUco marker publishers/detection nodes used for visual localization and testing of marker-based perception.
+   - Starts ArUco marker publishers/detection nodes used for visual localization and testing of marker-based perception. Results of the markers detection are in the folder `results`.
 
 Notes
 - The tmuxp session staggers startup with `sleep` between panes to ensure dependencies are available when each node starts.
-- Use the tmux keybindings (or `tmuxp` controls) to focus a pane, restart a single node, or view logs. Many panes are long-running processes; if a node exits, check its output in the pane to diagnose the issue.
-- There are commented example `ros2 topic pub` commands in `simulation.yml` that demonstrate how to trigger actions (takeoff, go, flyto, teleop, land) manually; these are useful for testing once the session is running.
-
-
