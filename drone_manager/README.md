@@ -43,7 +43,7 @@ State behaviours
 	- Sends a `takeoff` command on first entry.
 	- Monitors odometry z and transitions to `Coverage` when within ±0.3 m of the configured takeoff altitude (1.5 m).
 - Coverage:
-	- Iterates through waypoints, issuing `flyto(<waypoint>)` commands and waiting for arrival checks before advancing.
+	- Iterates through waypoints using RRT* algorithm, issuing `flyto(<waypoint>)` commands and waiting for arrival checks before advancing.
 	- When all waypoints are visited, commands a return to the charging station and marks coverage complete prior to landing.
 	- If `battery_low` is received, the FSM records the last visited waypoint, switches `waypoint_idx_` to the landing waypoint (index 4 — `goal5`), sends a fly-to there and transitions to `Land` when arrived.
 - Land:
