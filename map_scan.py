@@ -314,7 +314,7 @@ def main():
     
     try:
         planner = PNGMapDronePathPlanner(
-            png_path="/root/ros2_ws/src/pkg/mymap_crop2.png",
+            png_path="/root/ros2_ws/src/pkg/Drone-Manager/mymap_crop2.png",
             map_bounds=map_bounds, 
             start_pos=start_pos, 
             x_rows=3, 

@@ -99,7 +99,7 @@ def generate_launch_description():
     )
 
     output_file_arg = DeclareLaunchArgument(
-        'output_file', default_value='/root/ros2_ws/src/pkg/results/aruco_poses.txt',
+        'output_file', default_value='/root/ros2_ws/src/pkg/Drone-Manager/results/aruco_poses.txt',
         description='File path where first-time detections are appended.'
     )
 

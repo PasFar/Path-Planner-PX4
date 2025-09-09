@@ -12,7 +12,7 @@ def generate_launch_description():
         'frame_id': 'base_link',
         'map_frame_id': 'map',
         'odom_frame_id': 'odom',
-        'database_path': '/root/ros2_ws/src/pkg/drone_manager/config/rtabmap.db',
+        'database_path': '/root/ros2_ws/src/pkg/Drone-Manager/drone_manager/config/rtabmap.db',
         'subscribe_depth': True,
         'subscribe_odom_info': False,
         'approx_sync': True,

@@ -126,7 +126,7 @@ public:
     this->declare_parameter<std::string>("detection_mode", "");
     this->declare_parameter<std::vector<int64_t>>("marker_ids", std::vector<int64_t>{});
     this->declare_parameter<std::vector<double>>("marker_sizes", std::vector<double>{});
-    this->declare_parameter<std::string>("output_file", "/root/ros2_ws/src/pkg/results/aruco_poses.txt");
+    this->declare_parameter<std::string>("output_file", "/root/ros2_ws/src/pkg/Drone-Manager/results/aruco_poses.txt");
 
     float min_marker_size;  // percentage of image area
     this->get_parameter_or<float>("min_marker_size", min_marker_size, 0.02f);
@@ -173,7 +173,7 @@ public:
     this->get_parameter_or<bool>("image_is_rectified", useRectifiedImages, true);
     this->get_parameter_or<std::vector<int64_t>>("marker_ids", marker_ids, std::vector<int64_t>{});
     this->get_parameter_or<std::vector<double>>("marker_sizes", marker_sizes, std::vector<double>{});
-    this->get_parameter_or<std::string>("output_file", output_file, std::string("/root/ros2_ws/src/pkg/results/aruco_poses.txt"));
+    this->get_parameter_or<std::string>("output_file", output_file, std::string("/root/ros2_ws/src/pkg/Drone-Manager/results/aruco_poses.txt"));
 
     // If no vector provided, fall back to single pair for backward compatibility
     if (marker_ids.empty()) {

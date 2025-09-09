@@ -35,6 +35,8 @@
    cp /PATH/TO/sitl_utils/ros2_ws-src/pkg/Drone-Manager/models/model.sdf /PATH/TO/sitl_utils/PX4-Autopilot/Tools/simulation/gz/models/x500_depth/ 
    
    cp /PATH/TO/sitl_utils/ros2_ws-src/pkg/Drone-Manager/models/px4_humble_dockerfile.txt /PATH/TO/sitl_utils/docker/
+
+   cp /PATH/TO/sitl_utils/models/OakD-Lite/ /PATH/TO/PX4-Autopilot/Tools/simulation/gz/models/ -r
    ```
 
 5. **Build the Docker image:**
