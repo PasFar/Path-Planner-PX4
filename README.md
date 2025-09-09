@@ -18,7 +18,6 @@
 3. **Clone the custom Drone Manager package and the custom ArUco package:**
 
    ```bash
-   cd ..
    mkdir -p ros2_ws-src/pkg
    cd ros2_ws-src/pkg
    git clone https://github.com/PasFar/Drone-Manager.git
@@ -29,11 +28,11 @@
    Replace `/PATH/TO/` with the absolute path to your `sitl_utils` folder:
 
    ```bash
-   cp /PATH/TO/sitl_utils/ros2_ws-src/pkg/models/leo_race_field /PATH/TO/sitl_utils/PX4-Autopilot/Tools/simulation/gz/models/ -r
+   cp /PATH/TO/sitl_utils/ros2_ws-src/pkg/Drone-Manager/models/leo_race_field /PATH/TO/sitl_utils/PX4-Autopilot/Tools/simulation/gz/models/ -r
 
-   cp /PATH/TO/sitl_utils/ros2_ws-src/pkg/models/default.sdf /PATH/TO/sitl_utils/PX4-Autopilot/Tools/simulation/gz/worlds/
+   cp /PATH/TO/sitl_utils/ros2_ws-src/pkg/Drone-Manager/models/default.sdf /PATH/TO/sitl_utils/PX4-Autopilot/Tools/simulation/gz/worlds/
 
-   cp /PATH/TO/sitl_utils/ros2_ws-src/pkg/model.sdf /PATH/TO/sitl_utils/PX4-Autopilot/Tools/simulation/gz/models/x500_depth/ 
+   cp /PATH/TO/sitl_utils/ros2_ws-src/pkg/Drone-Manager/models/model.sdf /PATH/TO/sitl_utils/PX4-Autopilot/Tools/simulation/gz/models/x500_depth/ 
    
    ```
 

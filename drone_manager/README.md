@@ -21,7 +21,7 @@ Nodes
 - `offboard_control` — Core controller that executes trajectories, interfaces with PX4 messages, and contains trajectory and planner wiring. 
 - `move_manager_node` — Higher-level movement manager that accepts motion requests (via the package's custom `MoveCmd.msg`) and orchestrates planning, acceptance checks and safe handover to the `offboard_control` node.
 - `fsm_node` — Finite-state machine that manages flight modes and behaviour sequencing. It centralizes mode transitions and safety checks.
-- `battery_node` — Monitors battery state and publishes alerts or status messages that other components can use to trigger safe behaviours.
+- `battery_node` — Simulates battery state and publishes alerts or status messages that other components can use to trigger safe behaviours.
 - `teleop_node` — Teleoperation interface for manual control; it transforms operator inputs into `MoveCmd` or direct control messages for the offboard controller.
 - `px4_tf_pub` — Publishes transforms between the PX4 vehicle frames and the ROS TF tree so other nodes can access to pose and transform data consistently.
 
