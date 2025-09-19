@@ -1,4 +1,4 @@
-# Planning and Navigation Project
+# High-level path planner for PX4 UAV
 
 ## Setup Instructions
 
