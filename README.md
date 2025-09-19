@@ -1,4 +1,4 @@
-# High-level path planner for PX4 UAV
+# High-level path planner for PX4 UAVs
 
 ## Setup Instructions
 
